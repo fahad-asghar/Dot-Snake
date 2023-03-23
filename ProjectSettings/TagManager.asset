@@ -17,11 +17,12 @@ TagManager:
   - BottomTrigger
   - HealthPoint
   - SpecialFood
+  - DummyObstacle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Dummy
   - Water
   - UI
   - 

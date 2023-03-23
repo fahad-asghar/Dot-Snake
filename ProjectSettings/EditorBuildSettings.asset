@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Splash Screen.unity
+    path: Assets/_Dot Snake/Scenes/Splash Screen.unity
     guid: 3eacef54b687a3742b8fc668b5249cf9
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
+    path: Assets/_Dot Snake/Scenes/Main Menu.unity
     guid: 31616bb1d54eed64898b0f5ed69adb5a
   - enabled: 1
-    path: Assets/Scenes/Gameplay.unity
+    path: Assets/_Dot Snake/Scenes/Gameplay.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
