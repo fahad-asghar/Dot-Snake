@@ -11,7 +11,7 @@ public class BannerAdManager : MonoBehaviour
     private string _adUnitId = "ca-app-pub-3940256099942544/2934735716";
     #endif
 
-    private BannerView _bannerView;
+    public BannerView _bannerView;
 
     private void Start() => CreateBannerView();
 
@@ -27,6 +27,12 @@ public class BannerAdManager : MonoBehaviour
         
         ListenToAdEvents();
         LoadAd();
+    }
+
+    private void OnDestroy()
+    {
+        if (_bannerView != null)
+            _bannerView.Destroy();
     }
 
     public void LoadAd()

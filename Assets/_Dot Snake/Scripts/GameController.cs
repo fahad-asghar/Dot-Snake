@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
     [Space][Space][Header("GENERAL")]
     [SerializeField] public int lives;
     [SerializeField] public bool stopMovement;
-    [SerializeField] private int playerBestScore;
+    [SerializeField] private int playerBestScore = 0;
     [SerializeField] public float score;
     [SerializeField] private GameObject snake;
     [SerializeField] private GameObject _leaderboardController;
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        DOTween.SetTweensCapacity(1000, 50);
+        DOTween.SetTweensCapacity(2500, 50);
     }
 
     private void Start()
@@ -301,6 +301,9 @@ public class GameController : MonoBehaviour
             SoundManager.instance.playSound(SoundManager.instance.win[UnityEngine.Random.Range(0, SoundManager.instance.win.Count)]);
 
             highscoreGrid.gameObject.SetActive(true);
+
+            for(int i = 0; i < highscoreGrid.childCount; i++)
+                highscoreGrid.GetChild(i).GetComponent<Image>().DOColor(new Color(scoreIcon.color.r, scoreIcon.color.g, scoreIcon.color.b, 0), 0f);
             
             for(int i = 0; i < highscoreGrid.childCount; i++)
                 highscoreGrid.GetChild(i).GetComponent<Image>().DOFade(1, 0.3f).SetDelay(Random.Range(0f, 2.0f)).SetEase(Ease.Linear);
@@ -362,6 +365,9 @@ public class GameController : MonoBehaviour
     {
         score = value;
         scoreText.text = (int)score + "";
+
+        if(score > playerBestScore)
+            playerBestScoreText.text = (int)score + "";
     }
 
     public void SetScoreIconColor(Color color)

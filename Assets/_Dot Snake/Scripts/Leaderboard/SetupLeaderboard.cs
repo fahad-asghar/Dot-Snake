@@ -27,7 +27,7 @@ public class SetupLeaderboard : MonoBehaviour
             return;
         }
 
-        LoadingPanelController.instance.OpenLoadingPanel("Fetching leaderboard..!");
+        LoadingPanelController.instance.OpenLoadingPanel("Fetching leaderboard..");
 
         _resizeLeaderboard.ResizeLeaderboardLayout(
             _leaderboardScroll.GetComponent<ResizeReferences>().originalHeight,

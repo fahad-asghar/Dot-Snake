@@ -16,6 +16,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject leaderboardPanel;
     [SerializeField] private GameObject leaderboardController; 
 
+    [SerializeField] private BannerAdManager _bannerAdManagerPrefab;
+    private GameObject _bannerObject;
+
     public static string playfabId;
 
     private void Awake()
@@ -53,7 +56,6 @@ public class MainMenuController : MonoBehaviour
         {
             soundOff.gameObject.SetActive(true);
             soundOn.gameObject.SetActive(false);
-            GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().Stop();
         }
         else
         {
@@ -92,7 +94,6 @@ public class MainMenuController : MonoBehaviour
         soundOn.gameObject.SetActive(false);
         soundOff.gameObject.SetActive(true);
         SoundManager.instance.Mute();
-        GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().Stop();
     }
 
     public void SoundOffButton_OnClick()
@@ -102,18 +103,20 @@ public class MainMenuController : MonoBehaviour
         SoundManager.instance.UnMute();  
 
         SoundManager.instance.playSound(SoundManager.instance.buttonClick1);
-        GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().Play();
     }
 
     public void LeaderboardButton_OnClick()
     {
         SoundManager.instance.playSound(SoundManager.instance.buttonClick1);
+        _bannerObject = Instantiate(_bannerAdManagerPrefab.gameObject, Vector3.zero, Quaternion.identity);
         leaderboardController.GetComponent<SetupLeaderboard>().Setup();
     }
 
     public void LeaderboardCloseButton_OnClick()
     {
         SoundManager.instance.playSound(SoundManager.instance.buttonClick2);
+        Destroy(_bannerObject);
+
         leaderboardPanel.GetComponent<CanvasGroup>().DOFade(0, 0.5f).OnComplete(delegate(){
             leaderboardPanel.SetActive(false);
             leaderboardController.GetComponent<SetupLeaderboard>().ClearLeaderboard();
